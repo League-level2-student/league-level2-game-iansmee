@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	
 	    }
 	    void updateGameState() {
-	    	
+	    	bird.update();
 	    }
 	    void updateEndState()  {
 	    	
@@ -42,11 +42,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.setFont(titleFont);
 	    	g.setColor(Color.YELLOW);
 	    	g.drawString("Press enter to begin", 50, 400);
-	    	g.drawString("Press space to move", 5, 500);
+	    	g.drawString("Press space to move", 50, 500);
 	    }
 	    void drawGameState(Graphics g) {
 	    	g.setColor(Color.WHITE);
 	    	g.fillRect(0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT);
+	    	bird.draw(g);
 	    }
 	    void drawEndState(Graphics g)  {
 	    	g.setColor(Color.RED);
@@ -74,9 +75,21 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-			
+		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+		    if (currentState == END) {
+		        currentState = MENU;
+		    } else {
+		        currentState++;
+		    }
+		    
+		}
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+		    System.out.println("Space");
+		    bird.up();
+		}
+		
 	}
 
 	@Override
@@ -100,8 +113,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		}else if(currentState == END){
 		    updateEndState();
 		    
-		    repaint();
-		}
+		    }
+		repaint();
 	}
 
 }

@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,7 +14,8 @@ public class FlappyBird {
 		GamePanel panel = new GamePanel();
 		frame.add(panel);
 		frame.setVisible(true);
-		frame.setSize(WIDTH, HEIGHT);
+		frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(panel);
 		frame.pack();
