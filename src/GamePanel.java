@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,6 +18,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    final int END = 2;
 	    int currentState = MENU;
 	    
+	    public static Random rng = new Random();
+	    
+	    Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
+	    Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
 	   
 	   Timer frameDraw;
 	   Font titleFont = new Font("Arial", Font.PLAIN, 40);
@@ -32,6 +37,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    }
 	    void updateGameState() {
 	    	bird.update();
+	    	pillar.update();
+	    	pillar2.update();
+	    	
 	    }
 	    void updateEndState()  {
 	    	
@@ -48,6 +56,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.setColor(Color.WHITE);
 	    	g.fillRect(0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT);
 	    	bird.draw(g);
+	    	pillar.draw(g);
+	    	pillar2.draw(g);
 	    }
 	    void drawEndState(Graphics g)  {
 	    	g.setColor(Color.RED);
