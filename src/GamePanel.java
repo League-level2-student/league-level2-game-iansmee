@@ -13,20 +13,19 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
 	 
-	 	final int MENU = 0;
-	    final int GAME = 1;
-	    final int END = 2;
-	    int currentState = MENU;
+	 	public static final int MENU = 0;
+	 	public static final int GAME = 1;
+	 	public static final int END = 2;
+	    public static int currentState = MENU;
 	    
 	    public static Random rng = new Random();
+	    ObjectManager objectmanager = new ObjectManager();
 	    
-	    Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
-	    Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
 	   
 	   Timer frameDraw;
 	   Font titleFont = new Font("Arial", Font.PLAIN, 40);
 	
-	   Bird bird = new Bird(200,400,50,50);
+	   
 	   
 		GamePanel(){
 			frameDraw = new Timer(1000/60,this);
@@ -36,9 +35,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	
 	    }
 	    void updateGameState() {
-	    	bird.update();
-	    	pillar.update();
-	    	pillar2.update();
+	    	objectmanager.update();
 	    	
 	    }
 	    void updateEndState()  {
@@ -55,9 +52,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    void drawGameState(Graphics g) {
 	    	g.setColor(Color.WHITE);
 	    	g.fillRect(0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT);
-	    	bird.draw(g);
-	    	pillar.draw(g);
-	    	pillar2.draw(g);
+	    	objectmanager.draw(g);
+	    	
+	    	
 	    }
 	    void drawEndState(Graphics g)  {
 	    	g.setColor(Color.RED);
@@ -66,6 +63,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.setColor(Color.YELLOW);
 	    	g.drawString("GAME OVER", 150,400 );
 	    	g.drawString("Press enter to restart", 50, 500);
+	    	g.drawString("Your score was " + Bird.score,75 ,600 );
 	    }
 	
 	
@@ -89,16 +87,14 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
+		    	objectmanager.reset();
 		        currentState = MENU;
 		    } else {
 		        currentState++;
 		    }
 		    
 		}
-		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-		    System.out.println("Space");
-		    bird.up();
-		}
+		
 		
 	}
 

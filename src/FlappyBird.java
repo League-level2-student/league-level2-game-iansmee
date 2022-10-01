@@ -18,6 +18,7 @@ public class FlappyBird {
 		panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(panel);
+		frame.addKeyListener(panel.objectmanager);
 		frame.pack();
 
 	}

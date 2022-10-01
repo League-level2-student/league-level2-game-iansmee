@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class Pillar extends GameObject {
 
 	Pillar top;
+	
 
 	Pillar(double y, int height, Pillar top) {
 		super(FlappyBird.WIDTH, y, 100, height);
@@ -16,8 +17,10 @@ public class Pillar extends GameObject {
 	}
 
 	public void update() {
+		super.update();
 		x -= 2;
 		if (x <= -100) {
+			Bird.score +=1;
 			x = FlappyBird.WIDTH;
 			if (top == null) {
 				height = GamePanel.rng.nextInt(200) + 200;

@@ -4,7 +4,7 @@ public class GameObject {
 	
 	
 	
-	
+	boolean isActive = true;
 	int x;
 	double y;
 	int width;
