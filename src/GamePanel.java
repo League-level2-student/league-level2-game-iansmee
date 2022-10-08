@@ -5,8 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,6 +19,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	 	public static final int GAME = 1;
 	 	public static final int END = 2;
 	    public static int currentState = MENU;
+	    public static BufferedImage image;
+	    public static boolean needImage = true;
+	    public static boolean gotImage = false;	
 	    
 	    public static Random rng = new Random();
 	    ObjectManager objectmanager = new ObjectManager();
@@ -30,6 +35,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		GamePanel(){
 			frameDraw = new Timer(1000/60,this);
 		    frameDraw.start();
+		    if (needImage) {
+		        loadImage ("flappybirdbackground.png");
+		    }
 	}
 		void updateMenuState() {
 	    	
@@ -50,8 +58,12 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.drawString("Press space to move", 50, 500);
 	    }
 	    void drawGameState(Graphics g) {
-	    	g.setColor(Color.WHITE);
-	    	g.fillRect(0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT);
+	    	if (gotImage) {
+	    		g.drawImage(image, 0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT, null);
+	    	} else {
+	    		g.setColor(Color.BLUE);
+	    		g.fillRect(0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT);
+	    	}
 	    	objectmanager.draw(g);
 	    	
 	    	
@@ -64,6 +76,17 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.drawString("GAME OVER", 150,400 );
 	    	g.drawString("Press enter to restart", 50, 500);
 	    	g.drawString("Your score was " + Bird.score,75 ,600 );
+	    }
+	    void loadImage(String imageFile) {
+	        if (needImage) {
+	            try {
+	                image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+	    	    gotImage = true;
+	            } catch (Exception e) {
+	                
+	            }
+	            needImage = false;
+	        }
 	    }
 	
 	
