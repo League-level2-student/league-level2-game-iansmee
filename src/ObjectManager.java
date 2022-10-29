@@ -6,23 +6,41 @@ import java.util.Random;
 public class ObjectManager implements KeyListener {
 
 	public static Random rng = new Random();
+	Enemy enemy = new Enemy(0,400,50,50);
 	Bird bird = new Bird(200,400,50,50);
 	Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
     Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
 	
+    
+    
+    
+    
+    
 	void checkCollisions(){
 		if(bird.CollisionBox.intersects(pillar.CollisionBox)) {
-			bird.isActive = false;
+			pillar.speed = 2;
+			pillar2.speed = 2;
+			enemy.x +=5;
 		}
 		if(bird.CollisionBox.intersects(pillar2.CollisionBox)) {
-			bird.isActive = false;
-	}
+			pillar.speed=2;
+			pillar2.speed = 2;
+			enemy.x +=5;
 		}
+		if(bird.CollisionBox.intersects(enemy.CollisionBox)) {
+			bird.isActive = false;
+		}
+	}
+	
+
+	
+	
 		public void reset() {
 			bird = new Bird(200,400,50,50);
 			Bird.score = 0;
 	    	pillar = new Pillar(0, 200 + rng.nextInt(200),null);
 	    	pillar2 = new Pillar(pillar.height + 200, 400,pillar);
+	    	enemy = new Enemy(0,400,50,50);
 	    	
 		}
 
@@ -30,11 +48,22 @@ public class ObjectManager implements KeyListener {
 		pillar.draw(g);
     	pillar2.draw(g);
     	bird.draw(g);
+    	enemy.draw(g);
 	}
 	void update() {
 		pillar.update();
 		pillar2.update();
 		bird.update();
+		enemy.update();
+		if(pillar.x <= -80) {
+			enemy.slow();
+		}
+		if(enemy.x <= 0) {
+			enemy.x +=2;
+		}
+		
+		enemy.y = bird.y;
+		
     	if(bird.isActive == false) {
     		GamePanel.currentState = GamePanel.END;
     		

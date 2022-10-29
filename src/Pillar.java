@@ -46,10 +46,12 @@ public class Pillar extends GameObject {
 	
 		
 		
+		
 	
 		x -= speed;
 		if (x <= -100) {
 			speed ++;
+			
 			x = FlappyBird.WIDTH;
 			if (top == null) {
 				Bird.score += 1;
