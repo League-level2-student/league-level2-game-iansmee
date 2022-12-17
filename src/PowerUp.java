@@ -31,6 +31,7 @@ public static BufferedImage image;
 	}
 	public void update() {
 		super.update();
+		x -= Pillar.speed;
 	}
 	
 	

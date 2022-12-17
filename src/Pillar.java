@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class Pillar extends GameObject {
 
 	Pillar top;
-	int speed = 2;
+	public static int speed = 2;
 	
 	public BufferedImage image;
 	public boolean needImage = true;
@@ -50,12 +50,18 @@ public class Pillar extends GameObject {
 	
 		x -= speed;
 		if (x <= -100) {
-			speed +=2;
+			speed +=1;
 			
 			x = FlappyBird.WIDTH;
 			if (top == null) {
 				Bird.score += 1;
 				height = GamePanel.rng.nextInt(200) + 200;
+				if(ObjectManager.bird.score >= 1) {
+					if(ObjectManager.bird.score % 10 == 0) {
+				ObjectManager.powerup.x = ObjectManager.pillar.x + 20;
+				ObjectManager.powerup.y = ObjectManager.pillar2.y - 100;
+					}
+				}
 				
 			} else {
 				y = top.height + 200;

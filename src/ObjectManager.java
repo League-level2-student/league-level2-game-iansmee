@@ -6,11 +6,11 @@ import java.util.Random;
 public class ObjectManager implements KeyListener {
 
 	public static Random rng = new Random();
-	Enemy enemy = new Enemy(0,400,50,50);
-	Bird bird = new Bird(200,400,50,50);
-	Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
-    Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
-	PowerUp powerup = new PowerUp(0,0,50,50);
+	public static Enemy enemy = new Enemy(0,400,50,50);
+	public static Bird bird = new Bird(200,400,50,50);
+	public static Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
+	public static Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
+    public static PowerUp powerup = new PowerUp(0,0,50,50);
     long lastOccurred = 0;
     
     
@@ -46,6 +46,7 @@ public class ObjectManager implements KeyListener {
 		}
 		if(bird.CollisionBox.intersects(powerup.CollisionBox)) {
 			enemy.x=0;
+			powerup.y -= 800;
 		}
 	}
 	
@@ -83,12 +84,13 @@ public class ObjectManager implements KeyListener {
 		enemy.y = bird.y;
 		
 		
-		if(bird.score >= 1) {
-		if(bird.score % 5 == 0) {
-			powerup.x = pillar.x + 20;
-			powerup.y = pillar2.y - 100;
+		if(bird.y >= 800) {
+			bird.isActive = false;
 		}
+		if(bird.y <= 0) {
+			bird.isActive = false;
 		}
+		
 		
 		
     	if(bird.isActive == false) {

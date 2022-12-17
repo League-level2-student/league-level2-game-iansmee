@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -55,7 +56,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	    	g.setFont(titleFont);
 	    	g.setColor(Color.YELLOW);
 	    	g.drawString("Press enter to begin", 50, 400);
-	    	g.drawString("Press space to move", 50, 500);
+	    	g.drawString("Press space to jump", 50, 500);
+	    	g.drawString("press i for instructions", 50, 600);
 	    }
 	    void drawGameState(Graphics g) {
 	    	if (gotImage) {
@@ -117,7 +119,9 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		    }
 		    
 		}
-		
+		if(e.getKeyCode()==KeyEvent.VK_I) {
+			JOptionPane.showMessageDialog(null, "In this game you are a bird running from another bird. If that other bird catches up to you, you lose. Touching pillars will bring that bird closer to you.\n Every 10 levels, a star will appear that, when touched, will bring that bird back to its original location.\n Use the space bar to jump and avoid the pillars, and try to survive as long as possible. Good Luck!");
+		}
 		
 	}
 

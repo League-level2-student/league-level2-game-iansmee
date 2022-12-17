@@ -33,8 +33,7 @@ public void up() {
 velocity=-10;
 }
 public void draw(Graphics g){
-	g.setColor(Color.YELLOW);
-    g.fillRect(x, (int)y, width, height);
+	
     if (gotImage) {
     	g.drawImage(image, x, (int)y, width, height, null);
     } else {
