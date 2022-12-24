@@ -60,6 +60,7 @@ public class ObjectManager implements KeyListener {
 	    	pillar2 = new Pillar(pillar.height + 200, 400,pillar);
 	    	enemy = new Enemy(0,400,50,50);
 	    	powerup = new PowerUp(0,0,50,50);
+	    	Pillar.speed = 2;
 	    	
 		}
 
@@ -104,7 +105,6 @@ public class ObjectManager implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-		    System.out.println("Space");
 		    bird.up();
 		}
 	}

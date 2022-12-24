@@ -59,7 +59,7 @@ public class Pillar extends GameObject {
 				if(ObjectManager.bird.score >= 1) {
 					if(ObjectManager.bird.score % 10 == 0) {
 				ObjectManager.powerup.x = ObjectManager.pillar.x + 20;
-				ObjectManager.powerup.y = ObjectManager.pillar2.y - 100;
+				ObjectManager.powerup.y = height + 75;
 					}
 				}
 				
