@@ -6,7 +6,7 @@ import java.util.Random;
 public class ObjectManager implements KeyListener {
 
 	public static Random rng = new Random();
-	public static Enemy enemy = new Enemy(0,400,50,50);
+	public static Enemy enemy = new Enemy(0,400,65,50);
 	public static Bird bird = new Bird(200,400,50,50);
 	public static Pillar pillar = new Pillar(0, 200 + rng.nextInt(200),null);
 	public static Pillar pillar2 = new Pillar(pillar.height + 200, 400,pillar);
